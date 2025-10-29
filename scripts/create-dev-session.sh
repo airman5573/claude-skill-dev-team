@@ -49,9 +49,9 @@ tmux send-keys -t "${SESSION_NAME}" "codex" C-m
 
 # Step 4: Wait for initialization
 echo ""
-echo "[4/5] Waiting 10 seconds for codex to initialize..."
+echo "[4/5] Waiting 8 seconds for codex to initialize..."
 echo "(Codex needs time to load - please be patient)"
-for i in {10..1}; do
+for i in {8..1}; do
   echo -ne "⏳ ${i} seconds remaining...\r"
   sleep 1
 done

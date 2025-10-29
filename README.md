@@ -25,15 +25,65 @@
 
 ## 설치
 
+### 자동 설치 (권장)
+
 ```bash
-cd ~/.claude/skills/
-git clone git@github.com:airman5573/claude-skill-dev-team.git pm-manager
+# 1. 레포지토리 클론
+git clone git@github.com:airman5573/claude-skill-dev-team.git
+cd claude-skill-dev-team
+
+# 2. 설치 스크립트 실행
+./install.sh
+```
+
+설치 스크립트가 자동으로:
+- ✅ `~/.claude/skills/pm-manager`에 스킬 복사
+- ✅ `~/.claude/commands/pm.md`에 커맨드 설치
+- ✅ 스크립트에 실행 권한 부여
+- ✅ 의존성 확인 (tmux, codex)
+
+### 수동 설치
+
+```bash
+# 1. 스킬 설치
+mkdir -p ~/.claude/skills
+git clone git@github.com:airman5573/claude-skill-dev-team.git ~/.claude/skills/pm-manager
+
+# 2. 스크립트 실행 권한 부여
 chmod +x ~/.claude/skills/pm-manager/scripts/*.sh
+
+# 3. 커맨드 설치
+mkdir -p ~/.claude/commands
+cp ~/.claude/skills/pm-manager/.claude/commands/pm.md ~/.claude/commands/
+```
+
+### 프로젝트별 권한 설정
+
+프로젝트에서 PM Manager를 사용하려면 `.claude/settings.local.json`에 권한 추가:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Skill(pm-manager)"
+    ]
+  }
+}
 ```
 
 ## 사용법
 
-### 트리거
+### 커맨드 실행
+```
+/pm
+```
+
+Claude Code에서 `/pm` 커맨드를 입력하면 PM Manager가 활성화되고 물어봅니다:
+```
+"무엇을 개발하시겠습니까?"
+```
+
+### 수동 트리거 (대체 방법)
 ```
 "넌 PM이야" / "You're a PM" / "act as PM"
 ```

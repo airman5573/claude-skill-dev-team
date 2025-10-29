@@ -1,6 +1,6 @@
 ---
 name: pm-manager
-description: Act as PM managing codex developers in tmux sessions. Trigger ONLY when user explicitly declares the PM role with phrases like "넌 PM이야", "you are PM", "you're PM", "You're a PM", "you are a PM", "act as PM", "act as a PM", "너는 PM", "PM 역할 해", or similar direct role assignments. Creates tmux sessions, starts codex, assigns tasks in English, monitors progress, reports in Korean. Do NOT trigger for regular coding tasks.
+description: PM role for managing multiple codex developers. Triggers when user says PM-related phrases (you're pm, 너는 pm, act as pm, pm 역할). Creates tmux sessions, assigns tasks, monitors progress. (project, gitignored)
 allowed-tools: Bash, Read, Write
 ---
 
@@ -53,10 +53,10 @@ echo "✅ Session created: ${SESSION_NAME}"
 echo "Starting codex..."
 tmux send-keys -t "${SESSION_NAME}" "codex" C-m
 
-# CRITICAL: Wait 10+ seconds for initialization
+# CRITICAL: Wait 8+ seconds for initialization
 # Codex needs time to load
-echo "Waiting 10 seconds for codex to initialize..."
-sleep 10
+echo "Waiting 8 seconds for codex to initialize..."
+sleep 8
 ```
 
 ### Step 3: Verify Codex is Running (MANDATORY!)
@@ -160,7 +160,7 @@ Always report in Korean with:
 ### Rule 2: Codex Initialization
 ```
 ✅ ALWAYS: tmux send-keys "codex" C-m
-✅ ALWAYS: sleep 10
+✅ ALWAYS: sleep 8
 ✅ ALWAYS: Verify with grep "codex|claude"
 ❌ NEVER: Skip initialization wait
 ❌ NEVER: Assume codex started without checking
@@ -211,8 +211,8 @@ for i in $(seq 0 4); do
 done
 
 # Wait for ALL to initialize
-echo "Waiting 10 seconds for ${NUM_DEVS} codex instances..."
-sleep 10
+echo "Waiting 8 seconds for ${NUM_DEVS} codex instances..."
+sleep 8
 
 # Verify each codex
 for i in $(seq 0 4); do
@@ -338,8 +338,8 @@ tmux has-session -t "${SESSION_NAME}" && exit 1
 # ALWAYS start codex explicitly
 tmux send-keys -t "${SESSION_NAME}" "codex" C-m
 
-# ALWAYS wait 10 seconds
-sleep 10
+# ALWAYS wait 8 seconds
+sleep 8
 
 # ALWAYS verify before proceeding
 ```
@@ -352,7 +352,7 @@ Boss: "바코드 스캐너 focus 관리 방법 분석하고 문서 작성해줘"
 
 PM Actions:
 1. Create: dev-team-barcode-scanner-20251024-163937
-2. Start codex + wait 10s
+2. Start codex + wait 8s
 3. Verify codex running
 4. Assign: "Analyze barcode scanner focus management strategies.
    Read docs/barcode-scanner.md. Compare approaches.
@@ -368,7 +368,7 @@ Boss: "10개 사이트 CSS 셀렉터 추출해줘"
 
 PM Actions:
 1. Create session with 10 windows
-2. Start codex in each + wait 10s
+2. Start codex in each + wait 8s
 3. Verify all 10 codex running
 4. Assign unique task per developer (site1, site2, ...)
 5. Send Enter TWICE to each
